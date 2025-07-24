@@ -17,7 +17,6 @@ body {
     overflow-y: auto;
 }
 
-/* Container */
 .container {
     width: 100%;
     max-width: 450px;
@@ -27,41 +26,48 @@ body {
     align-items: center;
 }
 
-/* AUTH WRAPPER with Neon Edge */
+/* AUTH WRAPPER with Neon Edges */
 .auth-wrapper {
     position: relative;
     width: 100%;
     border-radius: 20px;
     overflow: hidden;
-    z-index: 1;
     background: rgba(255, 255, 255, 0.03);
     border: 2px solid rgba(255, 255, 255, 0.1);
 }
 
-/* Neon Edge Border (Only on edges, Animated) */
 .auth-wrapper::before {
     content: '';
     position: absolute;
     inset: 0;
-    padding: 2px;
     border-radius: 20px;
+    padding: 2px;
     background: linear-gradient(270deg, #ff0000, #ff4b2b, #ff9900, #ff0000, #8b0000);
     background-size: 400% 400%;
     -webkit-mask:
-        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0) content-box, 
         linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
     mask-composite: exclude;
-    z-index: 2;
-    animation: neonBorderMove 8s linear infinite;
+    animation: neonBorderMove 6s linear infinite;
+    z-index: 1;
 }
 
-/* FORM with internal background image */
+/* Moving Neon Lines on Edges */
+.auth-wrapper::after {
+    content: '';
+    position: absolute;
+    inset: 2px;
+    border-radius: 18px;
+    background: rgba(0,0,0,0.6);
+    z-index: 2;
+}
+
+/* FORM with background image inside */
 .form-container {
     position: relative;
     width: 100%;
     padding: 40px;
-    background: rgba(0, 0, 0, 0.4);
     border-radius: 15px;
     z-index: 3;
     display: none;
@@ -72,7 +78,6 @@ body {
     display: block;
 }
 
-/* Background image inside form */
 .form-container::before {
     content: '';
     position: absolute;
@@ -91,7 +96,6 @@ body {
     z-index: 2;
 }
 
-/* Headings */
 .form-container h2 {
     text-align: center;
     margin-bottom: 30px;
@@ -185,7 +189,7 @@ body {
     text-decoration: underline;
 }
 
-/* Message Container */
+/* Messages */
 .message-container {
     padding: 0 40px 20px;
 }
@@ -249,4 +253,4 @@ body {
 .switch-form a:focus {
     outline: 2px solid #ff0000;
     outline-offset: 2px;
-}
+        }
