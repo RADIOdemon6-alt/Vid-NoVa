@@ -1,0 +1,137 @@
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #1e1e2f 0%, #0f0f1f 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Neumorphism Card with Glassmorphism touch */
+.auth-wrapper {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(15px);
+    border-radius: 25px;
+    box-shadow: 
+        5px 5px 15px rgba(0, 0, 0, 0.5),
+        -5px -5px 15px rgba(255, 255, 255, 0.05),
+        inset 5px 5px 10px rgba(0,0,0,0.3),
+        inset -5px -5px 10px rgba(255,255,255,0.05);
+    width: 350px;
+    padding: 40px 30px;
+    color: #fff;
+    position: relative;
+}
+
+/* Logo Circle */
+.auth-wrapper .logo {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(10px);
+    margin: 0 auto 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 
+        3px 3px 10px rgba(0,0,0,0.3),
+        -3px -3px 10px rgba(255,255,255,0.05);
+}
+
+/* Title */
+.auth-wrapper h2 {
+    text-align: center;
+    font-size: 22px;
+    margin-bottom: 10px;
+}
+
+.auth-wrapper p {
+    text-align: center;
+    font-size: 14px;
+    color: #bbb;
+    margin-bottom: 30px;
+}
+
+/* Input Fields */
+.input-group {
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 15px 45px 15px 15px;
+    border: none;
+    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+    color: #fff;
+    font-size: 14px;
+    outline: none;
+    box-shadow: inset 2px 2px 5px rgba(0,0,0,0.3),
+                inset -2px -2px 5px rgba(255,255,255,0.05);
+}
+
+.input-group input::placeholder {
+    color: #aaa;
+}
+
+.input-group svg {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #aaa;
+}
+
+/* Login Button */
+.btn-primary {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 15px;
+    background: linear-gradient(135deg, #ff416c 0%, #ff4b2b 100%);
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(255, 65, 108, 0.3);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+}
+
+/* Links */
+.switch-form {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 13px;
+}
+
+.switch-form a {
+    color: #ff416c;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.switch-form a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    .auth-wrapper {
+        width: 90%;
+        padding: 30px 20px;
+    }
+  }
