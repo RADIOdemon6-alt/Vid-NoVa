@@ -30,33 +30,34 @@
             </div>
 
             <!-- Registration Form -->
-            <div id="registerForm" class="form-container">
-                <h2>Register</h2>
-                <form id="registerFormElement">
-                    <div class="input-group">
-                        <label for="registerUsername">Username</label>
-                        <input type="text" id="registerUsername" name="username" required>
-                    </div>
-                    <div class="input-group">
-                        <label for="registerEmail">Email</label>
-                        <input type="email" id="registerEmail" name="email" required>
-                    </div>
-                    <div class="input-group">
-                        <label for="registerPassword">Password</label>
-                        <input type="password" id="registerPassword" name="password" required>
-                    </div>
-                    <div class="input-group">
-                        <label for="timedPassword">Timed Password</label>
-                        <input type="password" id="timedPassword" name="timedPassword" placeholder="Optional temporary password">
-                        <small class="help-text">This password will expire after a set time period</small>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Register</button>
-                </form>
-                <p class="switch-form">
-                    Already have an account? 
-                    <a href="#" id="showLogin">Login here</a>
-                </p>
-            </div>
+            <<div id="registerForm" class="form-container active">
+    <div class="background-image"></div>
+    <h2>Register</h2>
+    <form id="registerFormElement">
+        <div class="input-group">
+            <label for="registerUsername">Username</label>
+            <input type="text" id="registerUsername" name="username" required>
+        </div>
+        <div class="input-group">
+            <label for="registerEmail">Email</label>
+            <input type="email" id="registerEmail" name="email" required>
+        </div>
+        <div class="input-group">
+            <label for="registerPassword">Password</label>
+            <input type="password" id="registerPassword" name="password" required>
+        </div>
+        <div class="input-group">
+            <label for="timedPassword">Timed Password</label>
+            <input type="password" id="timedPassword" name="timedPassword" placeholder="Optional temporary password">
+            <small class="help-text">This password will expire after a set time period</small>
+        </div>
+        <button type="submit" class="btn btn-primary">Register</button>
+    </form>
+    <p class="switch-form">
+        Already have an account? 
+        <a href="#" id="showLogin">Login here</a>
+    </p>
+</div>
 
             <!-- Success/Error Messages -->
             <div id="messageContainer" class="message-container">
