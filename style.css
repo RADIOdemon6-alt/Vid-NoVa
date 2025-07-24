@@ -31,49 +31,64 @@ body {
 .auth-wrapper {
     position: relative;
     width: 100%;
-    background: rgba(255, 255, 255, 0.05);
     border-radius: 20px;
     overflow: hidden;
     z-index: 1;
+    background: rgba(255, 255, 255, 0.03);
     border: 2px solid rgba(255, 255, 255, 0.1);
 }
 
-/* Neon Edge Border (Only on edges) */
+/* Neon Edge Border (Only on edges, Animated) */
 .auth-wrapper::before {
     content: '';
     position: absolute;
     inset: 0;
     padding: 2px;
     border-radius: 20px;
-    background: linear-gradient(45deg, #ff0000, #ff4b2b, #8b0000, #ff0000);
-    background-size: 400%;
+    background: linear-gradient(270deg, #ff0000, #ff4b2b, #ff9900, #ff0000, #8b0000);
+    background-size: 400% 400%;
     -webkit-mask:
         linear-gradient(#fff 0 0) content-box,
         linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
     mask-composite: exclude;
     z-index: 2;
-    animation: neonBorderMove 6s linear infinite;
+    animation: neonBorderMove 8s linear infinite;
 }
 
-/* FORM */
+/* FORM with internal background image */
 .form-container {
     position: relative;
     width: 100%;
     padding: 40px;
-    background: rgba(0, 0, 0, 0.2);
+    background: rgba(0, 0, 0, 0.4);
     border-radius: 15px;
     z-index: 3;
     display: none;
+    overflow: hidden;
 }
 
 .form-container.active {
     display: block;
 }
 
+/* Background image inside form */
+.form-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('/assets/images/form-bg.jpg') center/cover no-repeat;
+    opacity: 0.3;
+    z-index: 1;
+    pointer-events: none;
+}
+
 .form-container > * {
     position: relative;
-    z-index: 4;
+    z-index: 2;
 }
 
 /* Headings */
