@@ -1,6 +1,13 @@
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #1f1f2f 0%, #0f0f1f 100%);
+    background: linear-gradient(135deg, #0d0d0d 0%, #1a1a1a 100%);
     min-height: 100vh;
     display: flex;
     align-items: center;
@@ -8,24 +15,81 @@ body {
     padding: 20px;
 }
 
-/* Glassmorphism Card */
-.auth-wrapper {
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(15px);
-    border-radius: 25px;
-    box-shadow: 
-        5px 5px 15px rgba(0, 0, 0, 0.6),
-        -5px -5px 15px rgba(255, 255, 255, 0.05),
-        inset 3px 3px 8px rgba(0, 0, 0, 0.3),
-        inset -3px -3px 8px rgba(255, 255, 255, 0.03);
-    overflow: hidden;
-    padding: 40px;
+.container {
     width: 100%;
-    max-width: 400px;
-    color: #fff;
+    max-width: 450px;
+    margin: 0 auto;
 }
 
-/* Form Titles */
+.auth-wrapper {
+    background: rgba(255, 255, 255, 0.07);
+    backdrop-filter: blur(15px);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.7);
+    overflow: hidden;
+    position: relative;
+}
+
+/* صورة دائرية بنار نيون */
+.profile-pic {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    margin: 30px auto 20px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: #000;
+}
+
+.profile-pic img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    z-index: 1;
+}
+
+/* تأثير النيون الناري */
+.profile-pic::before {
+    content: '';
+    position: absolute;
+    top: -8px;
+    left: -8px;
+    width: calc(100% + 16px);
+    height: calc(100% + 16px);
+    border-radius: 50%;
+    background: conic-gradient(
+        #ff0000,
+        #ff4b2b,
+        #ff0000,
+        #ff4b2b,
+        #ff0000
+    );
+    animation: rotateNeon 3s linear infinite;
+    z-index: 0;
+    filter: blur(5px);
+}
+
+@keyframes rotateNeon {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Form container styles */
+.form-container {
+    padding: 40px;
+    display: none;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.form-container.active {
+    display: block;
+}
+
 .form-container h2 {
     text-align: center;
     margin-bottom: 30px;
@@ -34,67 +98,106 @@ body {
     font-weight: 600;
 }
 
-/* Neumorphism Inputs */
+/* Input group styles */
+.input-group {
+    margin-bottom: 20px;
+    position: relative;
+    transition: transform 0.2s ease;
+}
+
+.input-group:hover {
+    transform: translateY(-1px);
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #ccc;
+    font-weight: 500;
+    font-size: 14px;
+}
+
 .input-group input {
     width: 100%;
     padding: 15px;
-    border: none;
-    border-radius: 15px;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
     font-size: 16px;
+    transition: all 0.3s ease;
     background: rgba(255, 255, 255, 0.1);
     color: #fff;
-    backdrop-filter: blur(5px);
-    box-shadow: inset 2px 2px 5px rgba(0,0,0,0.5),
-                inset -2px -2px 5px rgba(255,255,255,0.05);
-    transition: all 0.3s ease;
-}
-
-.input-group input::placeholder {
-    color: #bbb;
 }
 
 .input-group input:focus {
     outline: none;
+    border-color: #ff0000;
     background: rgba(255, 255, 255, 0.15);
-    box-shadow: inset 2px 2px 8px rgba(0,0,0,0.5),
-                inset -2px -2px 8px rgba(255,255,255,0.05),
-                0 0 0 3px rgba(102, 126, 234, 0.2);
+    box-shadow: 0 0 0 3px rgba(255, 0, 0, 0.2);
     transform: translateY(-2px);
 }
 
-/* Neumorphism Button */
-.btn-primary {
+.input-group input:valid {
+    border-color: #28a745;
+}
+
+.help-text {
+    display: block;
+    margin-top: 5px;
+    color: #aaa;
+    font-size: 12px;
+}
+
+/* Button styles */
+.btn {
     width: 100%;
     padding: 15px;
     border: none;
-    border-radius: 15px;
+    border-radius: 10px;
     font-size: 16px;
     font-weight: 600;
     cursor: pointer;
-    background: linear-gradient(135deg, #ff416c 0%, #ff4b2b 100%);
-    color: #fff;
-    box-shadow: 5px 5px 15px rgba(0,0,0,0.4),
-                -5px -5px 15px rgba(255,255,255,0.05);
     transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
     margin-top: 10px;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #ff0000 0%, #8b0000 100%);
+    color: white;
 }
 
 .btn-primary:hover {
     transform: translateY(-2px);
-    box-shadow: 0 10px 20px rgba(255, 65, 108, 0.3);
+    box-shadow: 0 10px 20px rgba(255, 0, 0, 0.3);
+}
+
+.btn-primary:active {
+    transform: translateY(0);
+}
+
+.btn-secondary {
+    background: #6c757d;
+    color: white;
+}
+
+.btn-secondary:hover {
+    background: #5a6268;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(108, 117, 125, 0.3);
 }
 
 /* Switch form link */
 .switch-form {
     text-align: center;
     margin-top: 25px;
-    color: #bbb;
+    color: #999;
 }
 
 .switch-form a {
-    color: #ff416c;
-    font-weight: 600;
+    color: #ff4444;
     text-decoration: none;
+    font-weight: 600;
     transition: color 0.3s ease;
 }
 
@@ -103,27 +206,135 @@ body {
     text-decoration: underline;
 }
 
-/* Message Containers */
+/* Message container */
+.message-container {
+    padding: 0 40px 20px;
+}
+
+.message {
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    font-weight: 500;
+    animation: slideDown 0.3s ease-out;
+}
+
 .message.success {
     background: rgba(40, 167, 69, 0.2);
     color: #28a745;
-    border: 1px solid rgba(40, 167, 69, 0.3);
+    border: 1px solid #28a745;
 }
 
 .message.error {
     background: rgba(220, 53, 69, 0.2);
     color: #dc3545;
-    border: 1px solid rgba(220, 53, 69, 0.3);
+    border: 1px solid #dc3545;
 }
 
-/* Scrollbar */
+.message.hidden {
+    display: none;
+}
+
+/* Dashboard styles */
+.dashboard {
+    padding: 40px;
+    text-align: center;
+}
+
+.dashboard h2 {
+    color: #fff;
+    margin-bottom: 30px;
+    font-size: 28px;
+}
+
+.user-info {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 25px;
+    border-radius: 15px;
+    margin-bottom: 25px;
+    text-align: left;
+    color: #eee;
+}
+
+.user-info p {
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+.user-info strong {
+    color: #fff;
+    font-weight: 600;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Loading state */
+.btn.loading {
+    position: relative;
+    color: transparent;
+}
+
+.btn.loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    margin: -10px 0 0 -10px;
+    border: 2px solid transparent;
+    border-top: 2px solid #fff;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Scrollbar Dark */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #222;
+}
+
 ::-webkit-scrollbar-thumb {
-    background: #ff416c;
+    background: #ff0000;
 }
 
-/* Glassmorphism on hover */
-.input-group:hover {
-    transform: translateY(-2px);
+::-webkit-scrollbar-thumb:hover {
+    background: #ff4b2b;
 }
 
-/* Keep your animations the same */
+/* Focus indicators for accessibility */
+.btn:focus,
+.input-group input:focus,
+.switch-form a:focus {
+    outline: 2px solid #ff0000;
+    outline-offset: 2px;
+        }
