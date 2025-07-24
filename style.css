@@ -13,16 +13,11 @@ body {
     justify-content: center;
     background: url('/assets/images/body-bg.jpg') no-repeat center center fixed;
     background-size: cover;
-    animation: fadeInBody 1s ease-in-out;
     overflow-x: hidden;
     overflow-y: auto;
 }
 
-@keyframes fadeInBody {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
+/* Container */
 .container {
     width: 100%;
     max-width: 450px;
@@ -32,76 +27,44 @@ body {
     align-items: center;
 }
 
-/* AUTH WRAPPER with Neon Border */
+/* AUTH WRAPPER with Neon Edge */
 .auth-wrapper {
     position: relative;
     width: 100%;
-    background: rgba(255, 255, 255, 0.03);
-    backdrop-filter: blur(5px);
+    background: rgba(255, 255, 255, 0.05);
     border-radius: 20px;
     overflow: hidden;
     z-index: 1;
-    box-shadow: 0 0 25px rgba(255, 0, 0, 0.4);
+    border: 2px solid rgba(255, 255, 255, 0.1);
 }
 
-/* Outer Neon Border */
+/* Neon Edge Border (Only on edges) */
 .auth-wrapper::before {
     content: '';
     position: absolute;
-    inset: -3px;
+    inset: 0;
+    padding: 2px;
+    border-radius: 20px;
     background: linear-gradient(45deg, #ff0000, #ff4b2b, #8b0000, #ff0000);
     background-size: 400%;
-    border-radius: 20px;
-    z-index: -1;
-    filter: blur(5px);
+    -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    z-index: 2;
     animation: neonBorderMove 6s linear infinite;
 }
 
-/* Inner Glow Overlay */
-.auth-wrapper::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(10px);
-    border-radius: 20px;
-    z-index: 0;
-    pointer-events: none;
-}
-
-/* FORM Background Image */
-.form-container::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: url('/assets/images/form-bg.jpg') center/cover no-repeat;
-    opacity: 0.25;
-    z-index: 0;
-    pointer-events: none;
-}
-
-/* Inner Neon Border (Optional but cool) */
-.form-container::after {
-    content: '';
-    position: absolute;
-    inset: 10px;
-    border: 2px solid rgba(255, 0, 0, 0.4);
-    border-radius: 15px;
-    box-shadow: 0 0 10px rgba(255, 0, 0, 0.6), inset 0 0 10px rgba(255, 0, 0, 0.3);
-    pointer-events: none;
-    z-index: 1;
-}
-
-/* Form Container */
+/* FORM */
 .form-container {
     position: relative;
     width: 100%;
     padding: 40px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+    z-index: 3;
     display: none;
-    animation: fadeIn 0.5s ease-in-out;
 }
 
 .form-container.active {
@@ -110,9 +73,10 @@ body {
 
 .form-container > * {
     position: relative;
-    z-index: 2;
+    z-index: 4;
 }
 
+/* Headings */
 .form-container h2 {
     text-align: center;
     margin-bottom: 30px;
@@ -158,14 +122,6 @@ body {
     border-color: #ff0000;
     background: rgba(255, 255, 255, 0.15);
     box-shadow: 0 0 0 3px rgba(255, 0, 0, 0.2);
-}
-
-/* Help Text */
-.help-text {
-    display: block;
-    margin-top: 5px;
-    color: #ccc;
-    font-size: 12px;
 }
 
 /* Buttons */
@@ -244,11 +200,6 @@ body {
 }
 
 /* Animations */
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
 @keyframes slideDown {
     from { opacity: 0; transform: translateY(-10px); }
     to { opacity: 1; transform: translateY(0); }
@@ -283,4 +234,4 @@ body {
 .switch-form a:focus {
     outline: 2px solid #ff0000;
     outline-offset: 2px;
-        }
+}
