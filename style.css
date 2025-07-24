@@ -14,7 +14,8 @@ body {
     background: url('/assets/images/body-bg.jpg') no-repeat center center fixed;
     background-size: cover;
     animation: fadeInBody 1s ease-in-out;
-    overflow: hidden;
+    overflow-x: hidden; /* <-- بدل hidden */
+    overflow-y: auto;   /* <-- السماح بالتمرير العمودي */
 }
 
 @keyframes fadeInBody {
@@ -26,10 +27,14 @@ body {
     width: 100%;
     max-width: 450px;
     padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.auth-wrapper {
+..auth-wrapper {
     position: relative;
+    width: 100%;
     background: rgba(255, 255, 255, 0.07);
     backdrop-filter: blur(15px);
     border-radius: 20px;
@@ -49,10 +54,12 @@ body {
     background: url('/assets/images/form-bg.jpg') center/cover no-repeat;
     opacity: 0.65;
     z-index: 0;
+    pointer-events: none; /* <-- مهم عشان الصورة متغطيش الضغط على الفورم */
 }
 
 .form-container {
     position: relative;
+    width: 100%;
     padding: 40px;
     display: none;
     animation: fadeIn 0.5s ease-in-out;
@@ -231,4 +238,4 @@ body {
 .switch-form a:focus {
     outline: 2px solid #ff0000;
     outline-offset: 2px;
-}
+    }
