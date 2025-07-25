@@ -3,20 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>VidNova Intro</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700&display=swap" rel="stylesheet">
+  <title>VidNova Cinematic Intro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
   <style>
-    * {margin: 0; padding: 0; box-sizing: border-box;}
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     body, html {
       width: 100%; height: 100%;
-      background: radial-gradient(circle at center, #0a0a0a, #121212);
+      background: radial-gradient(circle at center, #0d0d0d, #121212);
       overflow: hidden;
-      font-family: 'Poppins', sans-serif;
+      font-family: 'Space Grotesk', sans-serif;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #fff;
       perspective: 1500px;
+      color: #fff;
     }
 
     .intro-wrapper {
@@ -26,67 +26,49 @@
     }
 
     .logo {
-      width: 160px;
-      height: 160px;
+      width: 180px; height: 180px;
       margin: 0 auto;
       background: url('/assets/images/logo.png') no-repeat center/contain;
       opacity: 0;
       transform: scale(0.3) rotateY(90deg);
-      animation: logoIn 1.5s forwards ease-out 0.5s;
+      animation: logoIn 1.5s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards 0.5s;
+    }
+
+    .glow {
+      position: absolute;
+      width: 200px; height: 200px;
+      top: calc(50% - 100px); left: calc(50% - 100px);
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0,255,255,0.3) 0%, transparent 70%);
+      filter: blur(25px);
+      opacity: 0;
+      animation: glowPulse 2s infinite alternate;
     }
 
     .name {
-      font-size: 2.5rem;
-      letter-spacing: 5px;
+      font-size: 2.8rem;
+      letter-spacing: 6px;
+      font-weight: 700;
       margin-top: 20px;
       opacity: 0;
-      transform: translateY(50px);
-      animation: nameOut 1s forwards ease-out 2s;
+      clip-path: inset(0 0 100% 0);
+      animation: nameReveal 1.2s ease-out forwards 2.2s;
     }
 
     .fall-out {
-      animation: fallDown 1.2s forwards ease-in-out 4s;
+      animation: fallPhysics 1.5s ease-in-out forwards 4.5s;
     }
 
-    .bg-fog {
+    .fog {
       position: absolute;
       width: 300%;
       height: 300%;
       top: -100%;
       left: -100%;
-      background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 70%);
-      animation: fogMove 10s linear infinite;
-      z-index: 1;
-    }
-
-    .overlay-dark {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.4);
+      background: radial-gradient(circle, rgba(255,255,255,0.04) 0%, transparent 70%);
+      animation: fogSpin 20s linear infinite;
       z-index: 0;
-    }
-
-    @keyframes logoIn {
-      0% {opacity: 0; transform: scale(0.3) rotateY(90deg);}
-      50% {opacity: 1; transform: scale(1.2) rotateY(0deg);}
-      100% {transform: scale(1) rotateY(0deg);}
-    }
-
-    @keyframes nameOut {
-      to {opacity: 1; transform: translateY(0);}
-    }
-
-    @keyframes fallDown {
-      0% {transform: translateY(0); opacity: 1;}
-      70% {transform: translateY(300px);}
-      90% {transform: translateY(270px);}
-      100% {transform: translateY(350px); opacity: 0;}
-    }
-
-    @keyframes fogMove {
-      0% {transform: rotate(0deg);}
-      100% {transform: rotate(360deg);}
+      filter: blur(40px);
     }
 
     .text-line {
@@ -96,44 +78,76 @@
     }
 
     .text-appear {
-      animation: textIn 1s forwards ease;
+      animation: textFadeUp 1s forwards ease;
     }
 
-    @keyframes textIn {
+    @keyframes logoIn {
+      0% {opacity: 0; transform: scale(0.3) rotateY(90deg);}
+      50% {opacity: 1; transform: scale(1.2) rotateY(0deg);}
+      100% {transform: scale(1) rotateY(0deg);}
+    }
+
+    @keyframes glowPulse {
+      0% {opacity: 0.2; transform: scale(1);}
+      100% {opacity: 0.4; transform: scale(1.1);}
+    }
+
+    @keyframes nameReveal {
+      to {opacity: 1; clip-path: inset(0 0 0 0);}
+    }
+
+    @keyframes fallPhysics {
+      0% {transform: translateY(0); opacity: 1;}
+      50% {transform: translateY(300px);}
+      70% {transform: translateY(260px);}
+      85% {transform: translateY(290px);}
+      100% {transform: translateY(350px); opacity: 0;}
+    }
+
+    @keyframes fogSpin {
+      0% {transform: rotate(0deg);}
+      100% {transform: rotate(360deg);}
+    }
+
+    @keyframes textFadeUp {
       to {opacity: 1; transform: translateY(0);}
     }
   </style>
 </head>
 <body>
-  <div class="bg-fog"></div>
-  <div class="overlay-dark"></div>
-
+  <div class="fog"></div>
+  <div class="glow"></div>
   <div class="intro-wrapper">
     <div class="logo" id="logo"></div>
     <div class="name" id="name">VIDNOVA</div>
-    <div class="text-line" id="line1">A Next Generation Video Hub</div>
-    <div class="text-line" id="line2">Powered by Community & Innovation</div>
+    <div class="text-line" id="line1">Experience Videos Like Never Before</div>
+    <div class="text-line" id="line2">Built for Creators & Viewers Together</div>
   </div>
 
   <script>
-    // Add fall down animation after name appears
+    // Start Glow after logo appears
+    setTimeout(() => {
+      document.querySelector('.glow').style.opacity = '1';
+    }, 2000);
+
+    // Fall Down
     setTimeout(() => {
       document.getElementById('name').classList.add('fall-out');
-    }, 4000);
+    }, 4500);
 
-    // Appear Text Lines
+    // Show text lines
     setTimeout(() => {
       document.getElementById('line1').classList.add('text-appear');
-    }, 5200);
+    }, 6000);
 
     setTimeout(() => {
       document.getElementById('line2').classList.add('text-appear');
-    }, 6200);
+    }, 7000);
 
-    // Redirect to Home Page after Animation
+    // Redirect to Home
     setTimeout(() => {
       window.location.href = 'home.html';
-    }, 8500);
+    }, 9000);
   </script>
 </body>
 </html>
