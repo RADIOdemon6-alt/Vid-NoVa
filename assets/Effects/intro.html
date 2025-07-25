@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>VIDNOVA</title>
+  <title>Intro Animation</title>
   <link href="https://fonts.googleapis.com/css2?family=Argesta+Display&display=swap" rel="stylesheet">
   <style>
     * {
@@ -30,7 +30,6 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      animation: zoomIn 1.5s ease forwards;
     }
 
     .logo {
@@ -38,7 +37,7 @@
       height: 150px;
       background: url('/assets/images/logo.png') no-repeat center/contain;
       opacity: 0;
-      animation: fadeIn 1.5s ease forwards;
+      animation: fadeInLogo 1.5s ease forwards;
       animation-delay: 0.5s;
     }
 
@@ -53,38 +52,25 @@
       letter-spacing: 3px;
     }
 
-    .fall {
+    .name-fall {
       animation: fallDown 1s ease forwards;
       animation-delay: 4s;
     }
 
-    .logo-up {
-      animation: logoUp 1s ease forwards;
-      animation-delay: 4.5s;
-    }
-
-    .welcome-text {
+    .text-line {
       opacity: 0;
       transform: rotateX(90deg) translateY(50px);
       text-align: center;
       font-size: 1.2rem;
       line-height: 1.6;
-      animation: textReveal 1s ease forwards;
-      animation-delay: 5.5s;
       text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
     }
 
-    .welcome-fall {
-      animation: fallDown 1s ease forwards;
-      animation-delay: 8s;
+    .text-appear {
+      animation: textReveal 1s ease forwards;
     }
 
-    @keyframes zoomIn {
-      0% { transform: scale(0.5); }
-      100% { transform: scale(1); }
-    }
-
-    @keyframes fadeIn {
+    @keyframes fadeInLogo {
       to { opacity: 1; }
     }
 
@@ -100,11 +86,6 @@
       100% { transform: translateY(300px); opacity: 0; }
     }
 
-    @keyframes logoUp {
-      0% { transform: translateY(0); }
-      100% { transform: translateY(-80px); }
-    }
-
     @keyframes textReveal {
       0% { opacity: 0; transform: rotateX(90deg) translateY(50px); }
       100% { opacity: 1; transform: rotateX(0deg) translateY(0); }
@@ -114,35 +95,39 @@
 </head>
 <body>
 
-  <div class="logo-container" id="logoContainer">
+  <div class="logo-container">
     <div class="logo" id="logo"></div>
     <div class="name" id="name">VIDNOVA</div>
-    <div class="welcome-text" id="welcomeText">
-      Welcome to VIDNOVA<br>
-      A platform for running and publishing videos for all ages
-    </div>
+    <div class="text-line" id="line1">Welcome to VIDNOVA</div>
+    <div class="text-line" id="line2">A platform for running</div>
+    <div class="text-line" id="line3">and publishing videos for all ages</div>
   </div>
 
   <script>
+    // Drop the name after initial animation
     setTimeout(() => {
-      document.getElementById('logoContainer').classList.add('fall');
+      document.getElementById('name').classList.add('name-fall');
     }, 4000);
 
+    // Show first line
     setTimeout(() => {
-      document.getElementById('logo').classList.add('logo-up');
-    }, 4500);
+      document.getElementById('line1').classList.add('text-appear');
+    }, 5000);
 
+    // Show second line
     setTimeout(() => {
-      document.getElementById('welcomeText').style.animationPlayState = 'running';
-    }, 5500);
+      document.getElementById('line2').classList.add('text-appear');
+    }, 6000);
 
+    // Show third line
     setTimeout(() => {
-      document.getElementById('welcomeText').classList.add('welcome-fall');
-    }, 8000);
+      document.getElementById('line3').classList.add('text-appear');
+    }, 7000);
 
+    // Wait 3 seconds then redirect
     setTimeout(() => {
       window.location.href = '../assets/pages/home/index.html';
-    }, 9500);
+    }, 10000);
   </script>
 </body>
 </html>
