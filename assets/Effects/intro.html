@@ -3,44 +3,32 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>VidNova Exclusive Intro</title>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600&display=swap" rel="stylesheet">
+  <title>VidNova Intro</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Argesta+Display&display=swap" rel="stylesheet">
   <style>
-    * {margin: 0; padding: 0; box-sizing: border-box;}
+    * {margin:0; padding:0; box-sizing:border-box;}
     body, html {
       width: 100%; height: 100%;
       background: #0d0d0d;
       overflow: hidden;
-      font-family: 'Space Grotesk', sans-serif;
+      font-family: 'Argesta Display', serif;
       display: flex; align-items: center; justify-content: center;
-      color: #fff;
-      perspective: 1500px;
-      position: relative;
+      perspective: 1000px;
     }
 
-    .pulse-bg {
+    #particles-js {
       position: absolute;
-      width: 300%; height: 300%;
-      top: -100%; left: -100%;
-      background: radial-gradient(circle, rgba(0,255,255,0.03) 0%, transparent 70%);
-      animation: pulseBG 5s infinite alternate;
+      width: 100%; height: 100%;
       z-index: 0;
-    }
-
-    .flash {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      background: white;
-      opacity: 0;
-      pointer-events: none;
-      z-index: 3;
     }
 
     .intro-wrapper {
       text-align: center;
       position: relative;
       z-index: 2;
+      transform-style: preserve-3d;
     }
 
     .logo {
@@ -48,129 +36,76 @@
       margin: 0 auto;
       background: url('/assets/images/logo.png') no-repeat center/contain;
       opacity: 0;
-      transform: scale(0.3) rotateY(90deg);
-      animation: logoIn 1.5s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards 0.5s;
     }
 
     .glow {
       position: absolute;
-      width: 220px; height: 220px;
-      top: calc(50% - 110px); left: calc(50% - 110px);
+      width: 240px; height: 240px;
+      top: calc(50% - 120px); left: calc(50% - 120px);
       border-radius: 50%;
       background: radial-gradient(circle, rgba(0,255,255,0.2) 0%, transparent 70%);
-      filter: blur(30px);
+      filter: blur(40px);
       opacity: 0;
-      animation: glowPulse 2s infinite alternate 2s;
-      z-index: 1;
     }
 
-    .name {
-      font-size: 2.5rem;
-      letter-spacing: 5px;
-      font-weight: 600;
-      margin-top: 20px;
+    .tagline {
+      font-size: 1.2rem;
+      letter-spacing: 2px;
+      color: #ddd;
+      margin-top: 30px;
       opacity: 0;
-      transform: scaleY(0);
-      animation: namePop 1s forwards ease-out 2s;
-    }
-
-    .fall-out {
-      animation: fallPhysics 1.5s ease-in-out forwards 4.5s;
-    }
-
-    .ripple {
-      position: absolute;
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: rgba(0,255,255,0.1);
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%) scale(0);
-      opacity: 0;
-      pointer-events: none;
-      z-index: 1;
-    }
-
-    .ripple-active {
-      animation: rippleExpand 1.5s ease-out forwards;
-    }
-
-    @keyframes pulseBG {
-      0% {transform: rotate(0deg);}
-      100% {transform: rotate(360deg);}
-    }
-
-    @keyframes glowPulse {
-      0% {opacity: 0.2; transform: scale(1);}
-      100% {opacity: 0.4; transform: scale(1.1);}
-    }
-
-    @keyframes logoIn {
-      0% {opacity: 0; transform: scale(0.3) rotateY(90deg);}
-      50% {opacity: 1; transform: scale(1.2) rotateY(0deg);}
-      100% {transform: scale(1) rotateY(0deg);}
-    }
-
-    @keyframes namePop {
-      to {opacity: 1; transform: scaleY(1);}
-    }
-
-    @keyframes fallPhysics {
-      0% {transform: translateY(0); opacity: 1;}
-      50% {transform: translateY(300px);}
-      70% {transform: translateY(270px);}
-      85% {transform: translateY(290px);}
-      100% {transform: translateY(350px); opacity: 0;}
-    }
-
-    @keyframes rippleExpand {
-      0% {transform: translate(-50%, -50%) scale(0); opacity: 0.3;}
-      100% {transform: translate(-50%, -50%) scale(20); opacity: 0;}
+      transform: translateY(30px);
     }
   </style>
 </head>
 <body>
-  <div class="pulse-bg"></div>
-  <div class="glow"></div>
-  <div class="flash" id="flash"></div>
-  <div class="ripple" id="ripple"></div>
+  <div id="particles-js"></div>
 
-  <div class="intro-wrapper">
+  <div class="glow" id="glow"></div>
+
+  <div class="intro-wrapper" id="intro">
     <div class="logo" id="logo"></div>
-    <div class="name" id="name">VIDNOVA</div>
+    <div class="tagline" id="line1">A platform where videos are reviewed before going public.</div>
+    <div class="tagline" id="line2">Every report is verified with care and action.</div>
+    <div class="tagline" id="line3">Safe, clean content — for all ages, always.</div>
   </div>
 
   <script>
-    // Glow Activation after logo in
-    setTimeout(() => {
-      document.querySelector('.glow').style.opacity = '1';
-    }, 2000);
+    // Particles.js Config
+    particlesJS('particles-js', {
+      particles: {
+        number: { value: 60, density: { enable: true, value_area: 800 } },
+        color: { value: '#00ffff' },
+        shape: { type: 'circle' },
+        opacity: { value: 0.1 },
+        size: { value: 3, random: true },
+        line_linked: { enable: true, distance: 120, color: '#00ffff', opacity: 0.05, width: 1 },
+        move: { enable: true, speed: 1, out_mode: 'out' }
+      },
+      interactivity: { detect_on: 'canvas', events: { onhover: { enable: false } }, modes: {} },
+      retina_detect: true
+    });
 
-    // Fall Name
-    setTimeout(() => {
-      document.getElementById('name').classList.add('fall-out');
-    }, 4500);
+    // GSAP Animation Timeline
+    gsap.timeline()
+      .to('#logo', {duration: 1.5, opacity: 1, scale: 1.2, rotateY: 360, ease: 'elastic.out(1,0.5)'}, "+=0.5")
+      .to('#logo', {duration: 0.5, scale: 1, ease: 'power2.out'})
+      .to('#glow', {duration: 1, opacity: 1, scale: 1.1, repeat: -1, yoyo: true}, "-=1")
+      .to('#line1', {duration: 1, opacity: 1, y: 0, ease: 'power2.out'}, "-=0.5")
+      .to('#line2', {duration: 1, opacity: 1, y: 0, ease: 'power2.out'}, "+=0.3")
+      .to('#line3', {duration: 1, opacity: 1, y: 0, ease: 'power2.out'}, "+=0.3");
 
-    // Ripple effect
-    setTimeout(() => {
-      document.getElementById('ripple').classList.add('ripple-active');
-    }, 5000);
+    // Parallax Mouse Movement
+    document.addEventListener('mousemove', (e) => {
+      let x = (e.clientX / window.innerWidth - 0.5) * 20;
+      let y = (e.clientY / window.innerHeight - 0.5) * 20;
+      document.getElementById('intro').style.transform = `rotateY(${x}deg) rotateX(${-y}deg)`;
+    });
 
-    // Screen Flash
-    setTimeout(() => {
-      let flash = document.getElementById('flash');
-      flash.style.opacity = '0.8';
-      setTimeout(() => {
-        flash.style.transition = 'opacity 0.5s';
-        flash.style.opacity = '0';
-      }, 100);
-    }, 5000);
-
-    // Redirect to home
+    // Redirect after animation
     setTimeout(() => {
       window.location.href = 'home.html';
-    }, 7000);
+    }, 9000);
   </script>
 </body>
 </html>
