@@ -1,4 +1,3 @@
-
 const firebaseConfig = {
     apiKey: "AIzaSyDTGtpFenZfbW9XkMPNtLJcwd7hgkvIIAc",
     authDomain: "radio-9d77f.firebaseapp.com",
@@ -9,21 +8,8 @@ const firebaseConfig = {
 };
 
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
-import { 
-    getAuth, 
-    createUserWithEmailAndPassword, 
-    signInWithEmailAndPassword, 
-    signOut, 
-    onAuthStateChanged 
-} from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
-import { 
-    getFirestore, 
-    doc, 
-    setDoc, 
-    getDoc, 
-    updateDoc,
-    serverTimestamp 
-} from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
+import { getFirestore, doc, setDoc, getDoc, updateDoc, serverTimestamp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
@@ -55,7 +41,7 @@ function showMessage(message, isError = false) {
         successText.textContent = message;
         successMessage.classList.remove('hidden');
     }
-    setTimeout(hideMessages, 5000);
+    setTimeout(hideMessages, 3000);
 }
 
 function hideMessages() {
@@ -128,10 +114,15 @@ async function registerUser(username, email, password, timedPassword) {
         }
 
         await setDoc(doc(db, 'users', user.uid), userData);
-        showMessage('Registration successful!');
+        showMessage('تم التسجيل بنجاح!');
+
+        setTimeout(() => {
+            window.location.href = '../assets/Effects/intro.html';
+        }, 1000);
+
         return user;
     } catch (error) {
-        console.error('Registration error:', error);
+        console.error('خطأ في التسجيل:', error);
         throw error;
     }
 }
@@ -145,10 +136,15 @@ async function loginUser(email, password) {
             lastLogin: serverTimestamp()
         }, { merge: true });
 
-        showMessage('Login successful!');
+        showMessage('تم تسجيل الدخول بنجاح!');
+
+        setTimeout(() => {
+            window.location.href = '../assets/Effects/intro.html';
+        }, 1000);
+
         return user;
     } catch (error) {
-        console.error('Login error:', error);
+        console.error('خطأ في تسجيل الدخول:', error);
         throw error;
     }
 }
@@ -156,10 +152,10 @@ async function loginUser(email, password) {
 async function logoutUser() {
     try {
         await signOut(auth);
-        showMessage('Logged out successfully.');
+        showMessage('تم تسجيل الخروج بنجاح.');
     } catch (error) {
-        console.error('Logout error:', error);
-        showMessage('Logout error.', true);
+        console.error('خطأ في تسجيل الخروج:', error);
+        showMessage('خطأ في تسجيل الخروج.', true);
     }
 }
 
@@ -176,12 +172,12 @@ async function loadUserData(user) {
                 await updateDoc(doc(db, 'users', user.uid), {
                     'timedPassword.isActive': false
                 });
-                showMessage('Timed password expired.', true);
+                showMessage('كلمة المرور المؤقتة انتهت صلاحيتها.', true);
             }
         }
     } catch (error) {
-        console.error('Error loading user data:', error);
-        showMessage('Error loading user data.', true);
+        console.error('خطأ في تحميل بيانات المستخدم:', error);
+        showMessage('حدث خطأ أثناء تحميل البيانات.', true);
     }
 }
 
@@ -208,12 +204,12 @@ loginFormElement?.addEventListener('submit', async e => {
         await loginUser(email, password);
     } catch (error) {
         const messages = {
-            'auth/user-not-found': 'No account found with this email.',
-            'auth/wrong-password': 'Incorrect password.',
-            'auth/invalid-email': 'Invalid email.',
-            'auth/too-many-requests': 'Too many attempts. Try later.'
+            'auth/user-not-found': 'لا يوجد حساب بهذا البريد.',
+            'auth/wrong-password': 'كلمة المرور خاطئة.',
+            'auth/invalid-email': 'البريد الإلكتروني غير صالح.',
+            'auth/too-many-requests': 'محاولات كثيرة، حاول لاحقاً.'
         };
-        showMessage(messages[error.code] || 'Login failed.', true);
+        showMessage(messages[error.code] || 'فشل تسجيل الدخول.', true);
     } finally {
         hideLoading(button);
     }
@@ -227,8 +223,8 @@ registerFormElement?.addEventListener('submit', async e => {
     const timedPassword = document.getElementById('timedPassword').value;
     const button = e.target.querySelector('button[type="submit"]');
 
-    if (username.trim().length < 3) return showMessage('Username too short.', true);
-    if (password.length < 6) return showMessage('Password too short.', true);
+    if (username.trim().length < 3) return showMessage('الاسم قصير جداً.', true);
+    if (password.length < 6) return showMessage('كلمة المرور قصيرة جداً.', true);
 
     showLoading(button);
     hideMessages();
@@ -238,11 +234,11 @@ registerFormElement?.addEventListener('submit', async e => {
         registerFormElement.reset();
     } catch (error) {
         const messages = {
-            'auth/email-already-in-use': 'Email already exists.',
-            'auth/invalid-email': 'Invalid email.',
-            'auth/weak-password': 'Weak password.'
+            'auth/email-already-in-use': 'البريد الإلكتروني مستخدم بالفعل.',
+            'auth/invalid-email': 'البريد الإلكتروني غير صالح.',
+            'auth/weak-password': 'كلمة المرور ضعيفة.'
         };
-        showMessage(messages[error.code] || 'Registration failed.', true);
+        showMessage(messages[error.code] || 'فشل التسجيل.', true);
     } finally {
         hideLoading(button);
     }
@@ -285,7 +281,7 @@ window.checkTimedPasswordStatus = async userId => {
         }
         return null;
     } catch (err) {
-        console.error('Timed password check failed:', err);
+        console.error('فشل التحقق من كلمة المرور المؤقتة:', err);
         return null;
     }
 };
