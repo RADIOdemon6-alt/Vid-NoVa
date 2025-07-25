@@ -89,7 +89,7 @@ body {
   box-shadow: 0 0 20px #00ffff;
 }
 
-/* Bubble Animation */
+/* Bubble */
 .bubble {
   position: fixed;
   bottom: 90px;
@@ -101,6 +101,7 @@ body {
   background: #1a1a1a;
   box-shadow: 0 0 15px #00ffff;
   z-index: 14;
+  opacity: 1;
 }
 
 /* Upload Options */
@@ -124,7 +125,7 @@ body {
   font-size: 1.5rem;
   text-align: center;
   line-height: 50px;
-  margin: 0 10px;
+  margin: 0 5px;
   box-shadow: 0 0 10px #00ffff;
   cursor: pointer;
   position: relative;
@@ -148,4 +149,4 @@ body {
 .upload-options .option:hover::after {
   transform: translateX(-50%) scale(1);
   opacity: 1;
-                }
+}
