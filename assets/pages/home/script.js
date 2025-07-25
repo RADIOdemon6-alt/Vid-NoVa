@@ -6,16 +6,15 @@ const searchBar = document.getElementById('search-bar');
 const closeSearch = document.getElementById('close-search');
 const settingsBtn = document.getElementById('settings-btn');
 const settingsChain = document.getElementById('settings-chain');
+const chainItems = settingsChain.querySelectorAll('.chain-item');
+const chainLinks = settingsChain.querySelectorAll('.chain-link-img');
 
 let menuOpen = false;
 let chainOpen = false;
 
-// Upload Button (+) Animation
+// Upload Button Animation
 uploadBtn.addEventListener('click', () => {
-  if (chainOpen) return; // لو قائمة السلسلة مفتوحة لا تفتح ال+
-
   if (!menuOpen) {
-    // فتح المنيو
     gsap.to(bubble, {
       scale: 1,
       duration: 0.3,
@@ -29,9 +28,8 @@ uploadBtn.addEventListener('click', () => {
     });
     menuOpen = true;
   } else {
-    // اغلاق المنيو
-    gsap.to(uploadOptions.children[0], { x: 0, duration: 0.4, ease: "power3.inOut" });
-    gsap.to(uploadOptions.children[1], { x: 0, duration: 0.4, ease: "power3.inOut" });
+    gsap.to(uploadOptions.children[0], { x: 0, duration: 0.4 });
+    gsap.to(uploadOptions.children[1], { x: 0, duration: 0.4 });
     gsap.to(uploadOptions, {
       opacity: 0,
       pointerEvents: 'none',
@@ -44,9 +42,8 @@ uploadBtn.addEventListener('click', () => {
   }
 });
 
-// Search Bar Events
+// Search Bar
 searchIcon.addEventListener('click', () => {
-  if (chainOpen) return; // لو السلسلة مفتوحة لا تفتح البحث
   searchBar.classList.add('active');
   gsap.to(searchIcon, { x: -window.innerWidth + 60, duration: 0.5 });
   gsap.to('.logo, .settings-btn', { opacity: 0, duration: 0.3 });
@@ -58,39 +55,27 @@ closeSearch.addEventListener('click', () => {
   gsap.to('.logo, .settings-btn', { opacity: 1, duration: 0.3 });
 });
 
-// Settings Button (Gear + Chain Menu)
+// Settings Chain
 settingsBtn.addEventListener('click', () => {
   if (!chainOpen) {
-    // Spin & Drop Gear
     gsap.to(settingsBtn, { rotation: 720, duration: 1, ease: "power4.out" });
-    gsap.to(settingsBtn, { y: 200, duration: 1, ease: "bounce.out", delay: 1 });
-
-    // Hide + Button (fall)
-    gsap.to(uploadBtn, { y: 300, rotation: 720, opacity: 0, duration: 1, ease: "back.in" });
-
-    // Hide Search Icon (smooth)
-    gsap.to(searchIcon, { scale: 0, opacity: 0, duration: 0.6, ease: "power2.inOut" });
-
-    // Show Chain Menu
+    gsap.to(settingsBtn, { y: window.innerHeight, duration: 1, ease: "power4.in", delay: 1, onComplete: () => {
+      settingsBtn.style.display = 'none';
+    }});
     gsap.to(settingsChain, { opacity: 1, pointerEvents: 'auto', duration: 0.5, delay: 1.5 });
 
-    // Animate Chain Items
-    const items = settingsChain.querySelectorAll('.chain-item');
-    const links = settingsChain.querySelectorAll('.chain-link');
+    chainLinks.forEach((link, i) => {
+      gsap.to(link, { opacity: 1, scaleY: 1, duration: 0.3, delay: 1.6 + i * 0.1 });
+    });
 
-    items.forEach((item, i) => {
-      gsap.to(item, { opacity: 1, y: 0, duration: 0.5, delay: 1.6 + i * 0.2, ease: "back.out(1.7)" });
-      if (links[i]) {
-        gsap.to(links[i], { opacity: 1, duration: 0.3, delay: 1.6 + i * 0.2 });
-      }
+    chainItems.forEach((item, i) => {
+      gsap.to(item, { opacity: 1, y: 0, scale: 1, duration: 0.5, delay: 2 + i * 0.2 });
     });
 
     chainOpen = true;
   } else {
-    // Reset All
-    gsap.to(settingsBtn, { rotation: 0, y: 0, duration: 1, ease: "power4.out" });
-    gsap.to(uploadBtn, { y: 0, rotation: 0, opacity: 1, duration: 1, ease: "back.out" });
-    gsap.to(searchIcon, { scale: 1, opacity: 1, duration: 0.6, ease: "power2.out" });
+    settingsBtn.style.display = 'block';
+    gsap.to(settingsBtn, { rotation: 0, y: 0, duration: 1 });
     gsap.to(settingsChain, { opacity: 0, pointerEvents: 'none', duration: 0.5 });
 
     chainOpen = false;
