@@ -11,7 +11,7 @@ uploadBtn.addEventListener('click', () => {
 });
 
 settingsBtn.addEventListener('click', () => {
-  settingsPopup.classList.add('active');
+  settingsPopup.classList.toggle('active');
   overlay.style.display = 'block';
 });
 
