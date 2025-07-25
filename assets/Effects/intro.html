@@ -1,1 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Intro Animation</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
+    body, html {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: radial-gradient(circle at center, #0f0f0f, #1a1a1a);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .logo-container {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      animation: zoomIn 1.5s ease forwards;
+    }
+
+    .logo {
+      width: 150px;
+      height: 150px;
+      background: url('../assets/images/logo.png') no-repeat center/contain;
+      opacity: 0;
+      animation: fadeIn 1.5s ease forwards;
+      animation-delay: 0.5s;
+    }
+
+    .name {
+      margin-top: 20px;
+      font-size: 2rem;
+      color: #fff;
+      opacity: 0;
+      transform: translateY(50px);
+      animation: slideOut 1s ease forwards;
+      animation-delay: 2s;
+    }
+
+    .fall {
+      animation: fallDown 1s ease forwards;
+      animation-delay: 4s;
+    }
+
+    @keyframes zoomIn {
+      0% { transform: scale(0.5); }
+      100% { transform: scale(1); }
+    }
+
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    @keyframes slideOut {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fallDown {
+      0% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(300px); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="logo-container" id="logoContainer">
+    <div class="logo"></div>
+    <div class="name">VIDNOVA</div>
+  </div>
+
+  <script>
+    // Start fall after animations finish
+    setTimeout(() => {
+      document.getElementById('logoContainer').classList.add('fall');
+    }, 4000);
+
+    // Redirect after animation ends
+    setTimeout(() => {
+      window.location.href = '../assets/pages/home/index.html';
+    }, 5500);
+  </script>
+</body>
+</html>
