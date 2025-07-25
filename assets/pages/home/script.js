@@ -1,13 +1,23 @@
 const uploadBtn = document.getElementById('upload-btn');
+const uploadLine = document.getElementById('upload-line');
 const uploadOptions = document.getElementById('upload-options');
 const settingsBtn = document.getElementById('settings-btn');
 const settingsPopup = document.getElementById('settings-popup');
 const overlay = document.getElementById('overlay');
-const changeLang = document.getElementById('change-lang');
+const searchIcon = document.getElementById('search-icon');
+const searchBar = document.getElementById('search-bar');
+
+let isUploadActive = false;
 
 uploadBtn.addEventListener('click', () => {
-  uploadOptions.style.display = uploadOptions.style.display === 'block' ? 'none' : 'block';
-  uploadOptions.classList.toggle('active');
+  isUploadActive = !isUploadActive;
+  if (isUploadActive) {
+    uploadLine.style.height = '5px';
+    uploadOptions.classList.add('active');
+  } else {
+    uploadLine.style.height = '0';
+    uploadOptions.classList.remove('active');
+  }
 });
 
 settingsBtn.addEventListener('click', () => {
@@ -20,6 +30,14 @@ overlay.addEventListener('click', () => {
   overlay.style.display = 'none';
 });
 
-changeLang.addEventListener('click', () => {
+searchIcon.addEventListener('click', () => {
+  document.querySelector('.logo').style.display = 'none';
+  settingsBtn.style.display = 'none';
+  searchIcon.style.transition = 'all 0.5s ease';
+  searchIcon.style.marginLeft = 'auto';
+  searchBar.classList.add('active');
+});
+
+document.getElementById('change-lang').addEventListener('click', () => {
   window.location.href = 'https://translate.google.com/translate?hl=&sl=auto&tl=auto&u=' + window.location.href;
 });
