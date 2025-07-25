@@ -150,3 +150,38 @@ body {
   transform: translateX(-50%) scale(1);
   opacity: 1;
 }
+/* Chain Menu */
+.settings-chain {
+  position: fixed;
+  top: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 20;
+}
+
+.chain-item {
+  width: 200px;
+  background: #1a1a1a;
+  padding: 15px;
+  margin: 5px 0;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 0 10px #00ffff;
+  color: #fff;
+  font-size: 1.2rem;
+  opacity: 0;
+  transform: translateY(-50px);
+}
+
+.chain-link {
+  width: 3px;
+  height: 20px;
+  background: #888;
+  margin: 3px 0;
+  opacity: 0;
+}
