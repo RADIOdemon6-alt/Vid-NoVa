@@ -1,156 +1,135 @@
-* {margin:0; padding:0; box-sizing:border-box;}
 body {
-  background: linear-gradient(135deg, #0d0d0d, #1a1a1a);
-  font-family: 'Argesta Display', serif;
-  color: #fff;
-  height: 100vh;
+  margin: 0;
+  background: #0f0f0f;
+  font-family: 'Segoe UI', sans-serif;
   overflow: hidden;
 }
 
-/* Topbar */
-.topbar {
+.top-bar {
+  position: fixed;
+  top: 0;
   width: 100%;
-  height: 60px;
+  height: 50px;
+  background: #1a1a1a;
   display: flex;
   align-items: center;
   justify-content: flex-end;
   padding: 0 20px;
-  background: rgba(20, 20, 20, 0.9);
-  position: fixed;
-  top: 0;
   z-index: 10;
-  backdrop-filter: blur(8px);
 }
 
 .logo {
-  height: 40px;
-  margin-right: auto;
+  position: absolute;
+  left: 20px;
+  height: 30px;
 }
 
-/* Buttons */
 .search-icon, .settings-btn {
-  font-size: 1.8rem;
-  margin-left: 20px;
+  font-size: 22px;
+  color: white;
   cursor: pointer;
-  transition: transform 0.3s ease;
-}
-
-/* Search Bar */
-.search-bar {
-  position: fixed;
-  top: 60px;
-  left: 100%;
-  width: calc(100% - 6px);
-  padding: 10px 20px;
-  background: #101010;
-  box-shadow: inset 0 0 20px #00ffff;
-  transition: left 0.5s ease;
-  z-index: 15;
-  display: flex;
-  align-items: center;
-  border-radius: 10px;
-}
-
-.search-bar.active {
-  left: 3px;
-}
-
-.search-bar input {
-  flex: 1;
-  padding: 10px;
-  background: transparent;
-  border: none;
-  color: #fff;
-  font-size: 1rem;
-  outline: none;
-}
-
-.close-search {
-  margin-left: 10px;
-  cursor: pointer;
+  margin-left: 15px;
+  user-select: none;
 }
 
 /* Upload Button */
 .upload-btn {
   position: fixed;
-  bottom: 20px;
+  bottom: 30px;
   left: 50%;
   transform: translateX(-50%);
-  width: 70px;
-  height: 70px;
-  border-radius: 50%;
-  background: #00ffff;
-  color: #000;
-  font-size: 2.5rem;
-  text-align: center;
-  line-height: 70px;
-  cursor: pointer;
-  z-index: 15;
-  box-shadow: 0 0 20px #00ffff;
-}
-
-/* Bubble */
-.bubble {
-  position: fixed;
-  bottom: 90px;
-  left: 50%;
-  transform: translateX(-50%) scale(0);
   width: 60px;
   height: 60px;
+  background: #00ffff;
   border-radius: 50%;
-  background: #1a1a1a;
-  box-shadow: 0 0 15px #00ffff;
-  z-index: 14;
-  opacity: 1;
+  font-size: 2rem;
+  color: #0f0f0f;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 9;
 }
 
-/* Upload Options */
+.bubble {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 60px;
+  background: rgba(0, 255, 255, 0.3);
+  border-radius: 50%;
+  pointer-events: none;
+  transform: scale(0);
+  opacity: 0;
+  z-index: 8;
+}
+
 .upload-options {
   position: fixed;
-  bottom: 90px;
+  bottom: 100px;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
+  gap: 20px;
   opacity: 0;
   pointer-events: none;
-  z-index: 16;
 }
 
 .upload-options .option {
   width: 50px;
   height: 50px;
-  border-radius: 50%;
   background: #1a1a1a;
-  color: #fff;
-  font-size: 1.5rem;
-  text-align: center;
-  line-height: 50px;
-  margin: 0 5px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
   box-shadow: 0 0 10px #00ffff;
   cursor: pointer;
-  position: relative;
+  transition: transform 0.3s ease;
 }
 
-.upload-options .option::after {
-  content: attr(data-label);
-  position: absolute;
-  top: -35px;
-  left: 50%;
-  transform: translateX(-50%) scale(0);
-  background: rgba(0,0,0,0.8);
-  padding: 5px 10px;
-  border-radius: 5px;
-  color: #fff;
-  white-space: nowrap;
-  transition: transform 0.3s ease, opacity 0.3s ease;
+.search-bar {
+  position: fixed;
+  top: 10px;
+  left: 20px;
+  right: 20px;
+  height: 40px;
+  background: #1a1a1a;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  padding: 0 15px;
+  box-shadow: inset 0 0 10px #00ffff;
+  transform: translateY(-100px);
   opacity: 0;
+  transition: all 0.5s ease;
+  z-index: 20;
 }
 
-.upload-options .option:hover::after {
-  transform: translateX(-50%) scale(1);
+.search-bar.active {
+  transform: translateY(0);
   opacity: 1;
 }
-/* Chain Menu */
+
+.search-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 16px;
+  outline: none;
+}
+
+.close-search {
+  cursor: pointer;
+  font-size: 20px;
+  margin-left: 10px;
+}
+
+/* Settings Chain */
 .settings-chain {
   position: fixed;
   top: 100px;
@@ -161,27 +140,26 @@ body {
   align-items: center;
   opacity: 0;
   pointer-events: none;
-  z-index: 20;
+  z-index: 50;
 }
 
 .chain-item {
-  width: 200px;
+  width: 150px;
   background: #1a1a1a;
-  padding: 15px;
+  padding: 10px;
   margin: 5px 0;
   border-radius: 10px;
   text-align: center;
   box-shadow: 0 0 10px #00ffff;
-  color: #fff;
-  font-size: 1.2rem;
+  color: white;
+  font-size: 1rem;
   opacity: 0;
-  transform: translateY(-50px);
+  transform: translateY(100vh) scale(0.5);
 }
 
-.chain-link {
-  width: 3px;
-  height: 20px;
-  background: #888;
-  margin: 3px 0;
+.chain-link-img {
+  width: 10px;
+  height: 30px;
   opacity: 0;
+  transform: scaleY(0);
 }
