@@ -3,131 +3,137 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Intro Animation</title>
-  <link href="https://fonts.googleapis.com/css2?family=Argesta+Display&display=swap" rel="stylesheet">
+  <title>VidNova Intro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700&display=swap" rel="stylesheet">
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
+    * {margin: 0; padding: 0; box-sizing: border-box;}
     body, html {
-      width: 100%;
-      height: 100%;
+      width: 100%; height: 100%;
+      background: radial-gradient(circle at center, #0a0a0a, #121212);
       overflow: hidden;
-      background: radial-gradient(circle at center, #0f0f0f, #1a1a1a);
+      font-family: 'Poppins', sans-serif;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-family: 'Argesta Display', serif;
       color: #fff;
-      perspective: 1000px;
+      perspective: 1500px;
     }
 
-    .logo-container {
+    .intro-wrapper {
+      text-align: center;
       position: relative;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+      z-index: 2;
     }
 
     .logo {
-      width: 150px;
-      height: 150px;
-      background: url('/assets/images/logo.png') no-repeat center/contain;
+      width: 160px;
+      height: 160px;
+      margin: 0 auto;
+      background: url('logo.png') no-repeat center/contain;
       opacity: 0;
-      animation: fadeInLogo 1.5s ease forwards;
-      animation-delay: 0.5s;
+      transform: scale(0.3) rotateY(90deg);
+      animation: logoIn 1.5s forwards ease-out 0.5s;
     }
 
     .name {
+      font-size: 2.5rem;
+      letter-spacing: 5px;
       margin-top: 20px;
-      font-size: 2rem;
       opacity: 0;
       transform: translateY(50px);
-      animation: slideOut 1s ease forwards;
-      animation-delay: 2s;
-      text-transform: uppercase;
-      letter-spacing: 3px;
+      animation: nameOut 1s forwards ease-out 2s;
     }
 
-    .name-fall {
-      animation: fallDown 1s ease forwards;
-      animation-delay: 4s;
+    .fall-out {
+      animation: fallDown 1.2s forwards ease-in-out 4s;
+    }
+
+    .bg-fog {
+      position: absolute;
+      width: 300%;
+      height: 300%;
+      top: -100%;
+      left: -100%;
+      background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 70%);
+      animation: fogMove 10s linear infinite;
+      z-index: 1;
+    }
+
+    .overlay-dark {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.4);
+      z-index: 0;
+    }
+
+    @keyframes logoIn {
+      0% {opacity: 0; transform: scale(0.3) rotateY(90deg);}
+      50% {opacity: 1; transform: scale(1.2) rotateY(0deg);}
+      100% {transform: scale(1) rotateY(0deg);}
+    }
+
+    @keyframes nameOut {
+      to {opacity: 1; transform: translateY(0);}
+    }
+
+    @keyframes fallDown {
+      0% {transform: translateY(0); opacity: 1;}
+      70% {transform: translateY(300px);}
+      90% {transform: translateY(270px);}
+      100% {transform: translateY(350px); opacity: 0;}
+    }
+
+    @keyframes fogMove {
+      0% {transform: rotate(0deg);}
+      100% {transform: rotate(360deg);}
     }
 
     .text-line {
       opacity: 0;
-      transform: rotateX(90deg) translateY(50px);
-      text-align: center;
-      font-size: 1.2rem;
-      line-height: 1.6;
-      text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+      transform: translateY(20px);
+      font-size: 1rem;
     }
 
     .text-appear {
-      animation: textReveal 1s ease forwards;
+      animation: textIn 1s forwards ease;
     }
 
-    @keyframes fadeInLogo {
-      to { opacity: 1; }
+    @keyframes textIn {
+      to {opacity: 1; transform: translateY(0);}
     }
-
-    @keyframes slideOut {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @keyframes fallDown {
-      0% { transform: translateY(0); opacity: 1; }
-      100% { transform: translateY(300px); opacity: 0; }
-    }
-
-    @keyframes textReveal {
-      0% { opacity: 0; transform: rotateX(90deg) translateY(50px); }
-      100% { opacity: 1; transform: rotateX(0deg) translateY(0); }
-    }
-
   </style>
 </head>
 <body>
+  <div class="bg-fog"></div>
+  <div class="overlay-dark"></div>
 
-  <div class="logo-container">
+  <div class="intro-wrapper">
     <div class="logo" id="logo"></div>
     <div class="name" id="name">VIDNOVA</div>
-    <div class="text-line" id="line1">Welcome to VIDNOVA</div>
-    <div class="text-line" id="line2">A platform for running</div>
-    <div class="text-line" id="line3">and publishing videos for all ages</div>
+    <div class="text-line" id="line1">A Next Generation Video Hub</div>
+    <div class="text-line" id="line2">Powered by Community & Innovation</div>
   </div>
 
   <script>
-    // Drop the name after initial animation
+    // Add fall down animation after name appears
     setTimeout(() => {
-      document.getElementById('name').classList.add('name-fall');
+      document.getElementById('name').classList.add('fall-out');
     }, 4000);
 
-    // Show first line
+    // Appear Text Lines
     setTimeout(() => {
       document.getElementById('line1').classList.add('text-appear');
-    }, 5000);
+    }, 5200);
 
-    // Show second line
     setTimeout(() => {
       document.getElementById('line2').classList.add('text-appear');
-    }, 6000);
+    }, 6200);
 
-    // Show third line
+    // Redirect to Home Page after Animation
     setTimeout(() => {
-      document.getElementById('line3').classList.add('text-appear');
-    }, 7000);
-
-    // Wait 3 seconds then redirect
-    setTimeout(() => {
-      window.location.href = '../assets/pages/home/index.html';
-    }, 10000);
+      window.location.href = 'home.html';
+    }, 8500);
   </script>
 </body>
 </html>
