@@ -4,41 +4,47 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>VidNova</title>
-  <link href="https://fonts.googleapis.com/css2?family=Argesta+Display&display=swap" rel="stylesheet">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <div class="topbar">
-    <img src="/assets/images/logo.png" alt="VidNova" class="logo">
-    <div class="search-icon" id="search-icon">🔍</div>
-    <div class="settings-btn" id="settings-btn">⚙️</div>
+  <!-- Top Bar -->
+  <div class="top-bar">
+    <img src="assets/images/logo.png" class="logo">
+    <div id="search-icon" class="search-icon">🔍</div>
+    <div id="settings-btn" class="settings-btn">⚙️</div>
   </div>
 
+  <!-- Upload Button -->
+  <div id="upload-btn" class="upload-btn">+</div>
+  <div id="bubble" class="bubble"></div>
+
+  <!-- Upload Options -->
+  <div id="upload-options" class="upload-options">
+    <div class="option">📹</div>
+    <div class="option">🎬</div>
+  </div>
+
+  <!-- Search Bar -->
   <div class="search-bar" id="search-bar">
-    <input type="text" placeholder="Search...">
-    <div class="close-search" id="close-search">✖</div>
+    <input type="text" placeholder="Search..." class="search-input">
+    <div id="close-search" class="close-search">❌</div>
   </div>
 
-  <div class="upload-btn" id="upload-btn">+</div>
-  <div class="bubble" id="bubble"></div>
-  <div class="upload-options" id="upload-options">
-    <div class="option" data-label="Upload Video">🎥</div>
-    <div class="option" data-label="Short Video">🎬</div>
+  <!-- Settings Chain -->
+  <div class="settings-chain" id="settings-chain">
+    <div class="chain-item">👤 Account</div>
+    <img src="assets/images/chain-link.png" class="chain-link-img">
+    <div class="chain-item">🔒 Privacy</div>
+    <img src="assets/images/chain-link.png" class="chain-link-img">
+    <div class="chain-item">📺 Channels</div>
+    <img src="assets/images/chain-link.png" class="chain-link-img">
+    <div class="chain-item">🌐 Language</div>
+    <img src="assets/images/chain-link.png" class="chain-link-img">
+    <div class="chain-item">🚨 Report</div>
   </div>
-<!-- Settings Chain Menu -->
-<div class="settings-chain" id="settings-chain">
-  <div class="chain-item">👤 My Account</div>
-  <div class="chain-link"></div>
-  <div class="chain-item">🔒 Privacy</div>
-  <div class="chain-link"></div>
-  <div class="chain-item">📺 My Channels</div>
-  <div class="chain-link"></div>
-  <div class="chain-item">🌐 Language</div>
-  <div class="chain-link"></div>
-  <div class="chain-item">🚨 Report</div>
-</div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
