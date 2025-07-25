@@ -1,43 +1,26 @@
 const uploadBtn = document.getElementById('upload-btn');
-const uploadLine = document.getElementById('upload-line');
+const bubble = document.getElementById('bubble');
 const uploadOptions = document.getElementById('upload-options');
-const settingsBtn = document.getElementById('settings-btn');
-const settingsPopup = document.getElementById('settings-popup');
-const overlay = document.getElementById('overlay');
 const searchIcon = document.getElementById('search-icon');
 const searchBar = document.getElementById('search-bar');
-
-let isUploadActive = false;
+const closeSearch = document.getElementById('close-search');
 
 uploadBtn.addEventListener('click', () => {
-  isUploadActive = !isUploadActive;
-  if (isUploadActive) {
-    uploadLine.style.height = '5px';
-    uploadOptions.classList.add('active');
-  } else {
-    uploadLine.style.height = '0';
-    uploadOptions.classList.remove('active');
-  }
-});
-
-settingsBtn.addEventListener('click', () => {
-  settingsPopup.classList.toggle('active');
-  overlay.style.display = 'block';
-});
-
-overlay.addEventListener('click', () => {
-  settingsPopup.classList.remove('active');
-  overlay.style.display = 'none';
+  gsap.to(bubble, {scale: 1, duration: 0.3, ease: "power2.out", onComplete: () => {
+    gsap.to(uploadOptions, {opacity: 1, pointerEvents: 'auto', duration: 0.3});
+    gsap.to(uploadOptions.children[0], {x: -80, duration: 0.3});
+    gsap.to(uploadOptions.children[1], {x: 80, duration: 0.3});
+  }});
 });
 
 searchIcon.addEventListener('click', () => {
-  document.querySelector('.logo').style.display = 'none';
-  settingsBtn.style.display = 'none';
-  searchIcon.style.transition = 'all 0.5s ease';
-  searchIcon.style.marginLeft = 'auto';
   searchBar.classList.add('active');
+  gsap.to(searchIcon, {x: -window.innerWidth + 60, duration: 0.5});
+  gsap.to('.logo, .settings-btn', {opacity: 0, duration: 0.3});
 });
 
-document.getElementById('change-lang').addEventListener('click', () => {
-  window.location.href = 'https://translate.google.com/translate?hl=&sl=auto&tl=auto&u=' + window.location.href;
+closeSearch.addEventListener('click', () => {
+  searchBar.classList.remove('active');
+  gsap.to(searchIcon, {x: 0, duration: 0.5});
+  gsap.to('.logo, .settings-btn', {opacity: 1, duration: 0.3});
 });
