@@ -1,6 +1,6 @@
-* {margin:0; padding:0; box-sizing: border-box;}
+* {margin:0; padding:0; box-sizing:border-box;}
 body {
-  background: #0d0d0d;
+  background: linear-gradient(135deg, #0d0d0d, #1a1a1a);
   font-family: 'Argesta Display', serif;
   color: #fff;
   height: 100vh;
@@ -15,11 +15,11 @@ body {
   align-items: center;
   justify-content: flex-end;
   padding: 0 20px;
-  background: rgba(20, 20, 20, 0.95);
+  background: rgba(20, 20, 20, 0.9);
   position: fixed;
   top: 0;
   z-index: 10;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+  backdrop-filter: blur(8px);
 }
 
 .logo {
@@ -27,6 +27,7 @@ body {
   margin-right: auto;
 }
 
+/* Buttons */
 .search-icon, .settings-btn {
   font-size: 1.8rem;
   margin-left: 20px;
@@ -41,8 +42,8 @@ body {
   left: 100%;
   width: calc(100% - 6px);
   padding: 10px 20px;
-  background: #0f0f0f;
-  box-shadow: inset 0 0 10px #00ffff;
+  background: #101010;
+  box-shadow: inset 0 0 20px #00ffff;
   transition: left 0.5s ease;
   z-index: 15;
   display: flex;
@@ -98,7 +99,7 @@ body {
   height: 60px;
   border-radius: 50%;
   background: #1a1a1a;
-  box-shadow: 0 0 10px #00ffff;
+  box-shadow: 0 0 15px #00ffff;
   z-index: 14;
 }
 
@@ -147,4 +148,4 @@ body {
 .upload-options .option:hover::after {
   transform: translateX(-50%) scale(1);
   opacity: 1;
-  }
+                }
