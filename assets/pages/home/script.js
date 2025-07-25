@@ -6,7 +6,50 @@ const searchBar = document.getElementById('search-bar');
 const closeSearch = document.getElementById('close-search');
 
 let menuOpen = false;
+const settingsBtn = document.getElementById('settings-btn');
+const settingsChain = document.getElementById('settings-chain');
+const uploadBtn = document.getElementById('upload-btn');
+const searchIcon = document.getElementById('search-icon');
 
+let chainOpen = false;
+
+settingsBtn.addEventListener('click', () => {
+  if (!chainOpen) {
+    // Spin & Drop Gear
+    gsap.to(settingsBtn, { rotation: 720, duration: 1, ease: "power4.out" });
+    gsap.to(settingsBtn, { y: 200, duration: 1, ease: "bounce.out", delay: 1 });
+
+    // Hide + Button (fall)
+    gsap.to(uploadBtn, { y: 300, rotation: 720, opacity: 0, duration: 1, ease: "back.in" });
+
+    // Hide Search Icon (smooth)
+    gsap.to(searchIcon, { scale: 0, opacity: 0, duration: 0.6, ease: "power2.inOut" });
+
+    // Show Chain Menu
+    gsap.to(settingsChain, { opacity: 1, pointerEvents: 'auto', duration: 0.5, delay: 1.5 });
+
+    // Animate Chain Items
+    const items = settingsChain.querySelectorAll('.chain-item');
+    const links = settingsChain.querySelectorAll('.chain-link');
+
+    items.forEach((item, i) => {
+      gsap.to(item, { opacity: 1, y: 0, duration: 0.5, delay: 1.6 + i * 0.2, ease: "back.out(1.7)" });
+      if (links[i]) {
+        gsap.to(links[i], { opacity: 1, duration: 0.3, delay: 1.6 + i * 0.2 });
+      }
+    });
+
+    chainOpen = true;
+  } else {
+    // Reset All
+    gsap.to(settingsBtn, { rotation: 0, y: 0, duration: 1, ease: "power4.out" });
+    gsap.to(uploadBtn, { y: 0, rotation: 0, opacity: 1, duration: 1, ease: "back.out" });
+    gsap.to(searchIcon, { scale: 1, opacity: 1, duration: 0.6, ease: "power2.out" });
+    gsap.to(settingsChain, { opacity: 0, pointerEvents: 'none', duration: 0.5 });
+
+    chainOpen = false;
+  }
+});
 uploadBtn.addEventListener('click', () => {
   if (!menuOpen) {
     // فتح المنيو
