@@ -6,18 +6,21 @@ const searchBar = document.getElementById('search-bar');
 const closeSearch = document.getElementById('close-search');
 const settingsBtn = document.getElementById('settings-btn');
 const settingsChain = document.getElementById('settings-chain');
-const settingsBtn = document.getElementById('settings-btn');
 const sideBar = document.getElementById('side-bar');
 const barItems = document.querySelectorAll('.bar-item');
 const subMenu = document.getElementById('sub-menu');
 
 let menuOpen = false;
 let chainOpen = false;
+let sideBarOpen = false;
 
-// Open Sidebar with gear rotation
+// Open Sidebar with gear rotation (First Click)
 settingsBtn.addEventListener('click', () => {
-  gsap.to(settingsBtn, { rotation: '+=360', duration: 1 });
-  sideBar.style.left = '0';
+  if (!sideBarOpen && !chainOpen) {
+    gsap.to(settingsBtn, { rotation: '+=360', duration: 1 });
+    sideBar.style.left = '0';
+    sideBarOpen = true;
+  }
 });
 
 // Handle clicks on sidebar items
@@ -74,6 +77,7 @@ function collapseOtherItems(activeItem) {
     }
   });
 }
+
 // Upload Button (+) Animation
 uploadBtn.addEventListener('click', () => {
   if (chainOpen) return; // لو قائمة السلسلة مفتوحة لا تفتح ال+
@@ -122,8 +126,8 @@ closeSearch.addEventListener('click', () => {
   gsap.to('.logo, .settings-btn', { opacity: 1, duration: 0.3 });
 });
 
-// Settings Button (Gear + Chain Menu)
-settingsBtn.addEventListener('click', () => {
+// Open Chain Menu (Second Click)
+settingsBtn.addEventListener('dblclick', () => {
   if (!chainOpen) {
     // Spin & Drop Gear
     gsap.to(settingsBtn, { rotation: 720, duration: 1, ease: "power4.out" });
