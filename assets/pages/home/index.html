@@ -3,102 +3,42 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Vidnova UI</title>
+  <title>VidNova</title>
   <link href="https://fonts.googleapis.com/css2?family=Argesta+Display&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- Topbar -->
+
   <div class="topbar">
-    <img src="/assets/images/logo.png" class="logo">
-    <svg id="search-icon" class="search-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35M17 11a6 6 0 11-12 0 6 6 0 0112 0z" />
-    </svg>
-    <svg id="settings-btn" class="settings-btn" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a8.001 8.001 0 014.243 14.905l.757 2.122a1 1 0 01-1.414 1.414l-2.122-.757a8.001 8.001 0 01-4.829 0l-2.122.757a1 1 0 01-1.414-1.414l.757-2.122A8.001 8.001 0 0112 4.354z"/>
-    </svg>
+    <img src="/assets/images/logo.png" alt="VidNova" class="logo">
+    <div class="search-icon" id="search-icon">🔍</div>
+    <div class="settings-btn" id="settings-btn">⚙️</div>
   </div>
 
-  <!-- Search Bar -->
   <div class="search-bar" id="search-bar">
     <input type="text" placeholder="Search...">
-    <span id="close-search" class="close-search">❌</span>
+    <div class="close-search" id="close-search">✖</div>
   </div>
 
-  <!-- Upload Buttons -->
   <div class="upload-btn" id="upload-btn">+</div>
   <div class="bubble" id="bubble"></div>
-
   <div class="upload-options" id="upload-options">
-    <div class="option" data-label="Upload Video">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#fff" viewBox="0 0 24 24">
-        <path d="M17 10.5V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-3.5l4 4v-11l-4 4z"/>
-      </svg>
-    </div>
-    <div class="option" data-label="Upload Short">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#fff" viewBox="0 0 24 24">
-        <path d="M12 2a10 10 0 100 20 10 10 0 000-20zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
-      </svg>
-    </div>
+    <div class="option" data-label="Upload Video">🎥</div>
+    <div class="option" data-label="Short Video">🎬</div>
   </div>
-
-  <!-- Settings Sidebar -->
-  <div class="settings-sidebar" id="settings-sidebar">
-    <div class="sidebar-title">Settings</div>
-    <div class="sidebar-item" data-section="general">⚙️ General Settings</div>
-    <div class="sidebar-item" data-section="privacy">🔒 Privacy</div>
-    <div class="sidebar-item" data-section="report">📝 Reports</div>
-    <div class="sidebar-item" data-section="theme">🎨 Theme</div>
-    <div class="sidebar-item" data-section="developers">💻 Developers</div>
-  </div>
-
-  <!-- General Settings Section -->
-  <div class="settings-section" id="general-section">
-    <div class="section-title">General Settings</div>
-    <div class="section-item">👤 My Account</div>
-    <div class="section-item">📺 My Channel</div>
-    <div class="section-item">🌐 Language</div>
-    <div class="note">More settings will be added in the future.</div>
-  </div>
-
-  <!-- Privacy Settings Section -->
-  <div class="settings-section" id="privacy-section">
-    <div class="section-title">Privacy Settings</div>
-    <div class="section-item">📄 Terms of Service</div>
-    <div class="section-item">🚫 Content Restriction</div>
-    <div class="section-item">🔐 Privacy Controls</div>
-    <div class="section-item">👤 My Account</div>
-  </div>
-
-  <!-- Reports Section -->
-  <div class="settings-section" id="report-section">
-    <div class="section-title">Reports</div>
-    <div class="section-item">⚠️ Report a Problem</div>
-    <div class="section-item">🚩 Report a User</div>
-  </div>
-
-  <!-- Theme Section -->
-  <div class="settings-section" id="theme-section">
-    <div class="section-title">Theme</div>
-    <div class="section-item">
-      <label><input type="radio" name="theme" value="light"> Light</label>
-    </div>
-    <div class="section-item">
-      <label><input type="radio" name="theme" value="dark"> Dark</label>
-    </div>
-    <div class="section-item">
-      <label><input type="radio" name="theme" value="default" checked> Default</label>
-    </div>
-    <div class="note">More theme options will be added in the future.</div>
-  </div>
-
-  <!-- Developers Section (Redirects to another page) -->
-  <div class="settings-section" id="developers-section">
-    <div class="section-title">Developers</div>
-    <div class="section-item">You will be redirected to the Developers Page.</div>
-  </div>
-
+<!-- Settings Chain Menu -->
+<div class="settings-chain" id="settings-chain">
+  <div class="chain-item">👤 My Account</div>
+  <div class="chain-link"></div>
+  <div class="chain-item">🔒 Privacy</div>
+  <div class="chain-link"></div>
+  <div class="chain-item">📺 My Channels</div>
+  <div class="chain-link"></div>
+  <div class="chain-item">🌐 Language</div>
+  <div class="chain-link"></div>
+  <div class="chain-item">🚨 Report</div>
+</div>
   <script src="script.js"></script>
 </body>
 </html>
