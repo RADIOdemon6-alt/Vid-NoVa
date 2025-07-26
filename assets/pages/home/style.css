@@ -198,3 +198,31 @@ body {
   transform: translateX(-50%) scale(1);
   opacity: 1;
 }
+body.light-theme {
+  background: linear-gradient(135deg, #f0f0f0, #ffffff);
+  color: #000;
+}
+
+body.light-theme .topbar {
+  background: rgba(255, 255, 255, 0.9);
+}
+
+body.light-theme .settings-sidebar {
+  background: rgba(255,255,255,0.95);
+}
+
+body.light-theme .settings-section {
+  background: rgba(240,240,240,0.95);
+}
+
+body.light-theme .upload-btn {
+  background: #000;
+  color: #fff;
+  box-shadow: 0 0 20px #000;
+}
+
+body.light-theme .bubble,
+body.light-theme .upload-options .option {
+  background: #fff;
+  box-shadow: 0 0 10px #000;
+}
